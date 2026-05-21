@@ -398,8 +398,7 @@
       display: block;
     }
 
-    .workflow-module,
-    .signal-module {
+    .workflow-module {
       padding: 18px;
     }
 
@@ -411,8 +410,7 @@
       font-weight: 800;
     }
 
-    .workflow-list,
-    .signal-list {
+    .workflow-list {
       margin: 0;
       padding: 0;
       list-style: none;
@@ -420,8 +418,7 @@
       gap: 11px;
     }
 
-    .workflow-list li,
-    .signal-list li {
+    .workflow-list li {
       display: grid;
       grid-template-columns: 32px 1fr;
       gap: 10px;
@@ -432,8 +429,7 @@
       font-weight: 600;
     }
 
-    .workflow-list i,
-    .signal-list i {
+    .workflow-list i {
       width: 32px;
       height: 32px;
       display: grid;
@@ -443,28 +439,6 @@
       background: rgba(255, 255, 255, 0.58);
       color: var(--blue-steel);
       font-size: 16px;
-    }
-
-    .signal-list strong {
-      display: block;
-      margin-bottom: 2px;
-      color: var(--graphite-800);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .silver-rule {
-      height: 1px;
-      margin: 16px 0;
-      background: linear-gradient(90deg, transparent, rgba(174, 183, 191, 0.82), transparent);
-    }
-
-    .premium-note {
-      margin: 0;
-      color: var(--color-text-tertiary);
-      font-family: var(--font-serif);
-      font-size: 23px;
-      line-height: 1.05;
     }
 
     .loading,
@@ -631,8 +605,7 @@
         grid-row: 1 / span 6;
       }
 
-      .workflow-module,
-      .signal-module {
+      .workflow-module {
         grid-column: 1;
       }
     }
@@ -664,8 +637,7 @@
         grid-row: auto;
       }
 
-      .workflow-module,
-      .signal-module {
+      .workflow-module {
         grid-column: auto;
       }
 
@@ -734,12 +706,7 @@
         <div class="mark"><i class="ti ti-diamond" aria-hidden="true"></i></div>
         <div class="brand-copy">
           <strong>Capital Infusion Playbook</strong>
-          <span>Quick-silver desk interface</span>
         </div>
-      </div>
-      <div class="system-tags" aria-label="Site status">
-        <span class="system-tag"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Modular UI</span>
-        <span class="system-tag"><i class="ti ti-cloud-upload" aria-hidden="true"></i> Vercel-ready</span>
       </div>
     </header>
 
@@ -747,7 +714,7 @@
       <section class="module intro-module" aria-label="Playbook overview">
         <p class="eyebrow">Capital Infusion</p>
         <h1>Industry Playbook</h1>
-        <p class="deck">A premium sales desk for matching business pressure points to funding conversations, built around fast lookup and clean call flow.</p>
+        <p class="deck">A sales desk for matching business pressure points to funding conversations, built around fast lookup and clean call flow.</p>
       </section>
 
       <section class="module advisor-module" aria-label="Advisor profile">
@@ -774,14 +741,6 @@
         </div>
       </section>
 
-      <section class="module stat-module" aria-label="Verified baseline count">
-        <i class="ti ti-shield-check" aria-hidden="true"></i>
-        <div>
-          <strong>1</strong>
-          <span>Verified baseline</span>
-        </div>
-      </section>
-
       <section class="module workflow-module" aria-label="Call workflow">
         <h2 class="module-title">Call Stack</h2>
         <ul class="workflow-list">
@@ -789,16 +748,6 @@
           <li><i class="ti ti-message-question" aria-hidden="true"></i><span>Open a sector and lead with the strongest rapport line.</span></li>
           <li><i class="ti ti-cash" aria-hidden="true"></i><span>Map the cash gap to a specific funding use case.</span></li>
         </ul>
-      </section>
-
-      <section class="module signal-module" aria-label="Premium system notes">
-        <h2 class="module-title">Desk Signals</h2>
-        <ul class="signal-list">
-          <li><i class="ti ti-bolt" aria-hidden="true"></i><span><strong>Fast scan</strong>Designed for live calls and quick pivots.</span></li>
-          <li><i class="ti ti-sparkles" aria-hidden="true"></i><span><strong>Silver system</strong>Graphite type, chrome panels, teal accents.</span></li>
-        </ul>
-        <div class="silver-rule"></div>
-        <p class="premium-note">Precise. Calm. Expensive-looking.</p>
       </section>
 
       <section class="module playbook-module" aria-label="Interactive industry playbook">
