@@ -303,26 +303,13 @@ function render() {
   else main.innerHTML = renderHome();
 }
 
-function scrollToPlaybook() {
-  try {
-    var hostDoc = (window.parent && window.parent !== window) ? window.parent.document : document;
-    var target = hostDoc.getElementById("playbookMount") || hostDoc.querySelector(".ci-bar") || document.querySelector(".ci-bar");
-    if (target && target.scrollIntoView) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  } catch (e) {
-    var fallback = document.querySelector(".ci-bar");
-    if (fallback && fallback.scrollIntoView) fallback.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
 document.getElementById("ciApp").addEventListener("click", function(e){
   var t = e.target.closest("[data-action]");
   if (!t) return;
   var action = t.dataset.action;
   if (action === "toggle") { state.openCats[t.dataset.id] = !state.openCats[t.dataset.id]; render(); }
-  else if (action === "industry") { state.view = "industry"; state.industryId = t.dataset.id; render(); scrollToPlaybook(); }
-  else if (action === "back") { state.view = "home"; state.industryId = null; render(); scrollToPlaybook(); }
+  else if (action === "industry") { state.view = "industry"; state.industryId = t.dataset.id; render(); window.scrollTo(0,0); }
+  else if (action === "back") { state.view = "home"; state.industryId = null; render(); }
 });
 
 document.getElementById("ciSearch").addEventListener("input", function(e){
