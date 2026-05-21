@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Capital Infusion industry playbook for sales discovery, pain hooks, qualifying questions, and use-of-funds positioning.">
+  <title>Capital Infusion Playbook</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    :root {
+      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-serif: Georgia, "Times New Roman", serif;
+      --color-text-primary: #18231f;
+      --color-text-secondary: #4c5b55;
+      --color-text-tertiary: #78867f;
+      --color-text-info: #0f766e;
+      --color-text-success: #2f6e3c;
+      --color-text-danger: #9f2d2d;
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f5f8f6;
+      --color-background-success: #e8f6ec;
+      --color-background-danger: #fff1f0;
+      --color-border-tertiary: #d9e1dd;
+      --color-border-info: #64b7ad;
+      --border-radius-md: 8px;
+      --shadow-soft: 0 18px 55px rgba(24, 35, 31, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(238, 247, 242, 0.84), rgba(250, 252, 250, 0.96) 42%),
+        #f8faf8;
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .site-shell {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px 0 28px;
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .site-rail {
+      align-self: start;
+      position: sticky;
+      top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .brand-lockup,
+    .advisor,
+    .metric-grid,
+    .status-panel {
+      border: 1px solid rgba(148, 163, 154, 0.28);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand-lockup {
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 12px;
+      color: var(--color-text-info);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #2f9e87;
+      box-shadow: 0 0 0 4px rgba(47, 158, 135, 0.12);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.02;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .deck {
+      margin: 12px 0 0;
+      color: var(--color-text-secondary);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .advisor {
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .advisor img {
+      width: 74px;
+      height: 74px;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: 50% 18%;
+      border: 1px solid var(--color-border-tertiary);
+      background: #fff;
+    }
+
+    .advisor-name {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 720;
+    }
+
+    .advisor-role {
+      margin: 5px 0 0;
+      color: var(--color-text-secondary);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .metric-grid {
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .metric {
+      min-height: 78px;
+      padding: 12px;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 8px;
+      background: #fbfdfc;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 7px;
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      line-height: 1.25;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .status-panel {
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .status-panel h2 {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .status-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+
+    .status-list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 8px;
+      align-items: start;
+      color: var(--color-text-secondary);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .status-list i {
+      color: var(--color-text-info);
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    .workspace {
+      min-width: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .topbar {
+      min-height: 64px;
+      border: 1px solid rgba(148, 163, 154, 0.28);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(16px);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .topbar-title {
+      min-width: 0;
+    }
+
+    .topbar-title p {
+      margin: 0;
+      color: var(--color-text-tertiary);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .topbar-title h2 {
+      margin: 4px 0 0;
+      font-size: 18px;
+      font-weight: 740;
+      letter-spacing: 0;
+    }
+
+    .topbar-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid #bfdcd5;
+      background: #eef9f5;
+      color: #155e56;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .playbook-surface {
+      min-height: 660px;
+      border: 1px solid rgba(148, 163, 154, 0.32);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-soft);
+      padding: clamp(14px, 2vw, 22px);
+      overflow: hidden;
+    }
+
+    .playbook-mount {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .loading,
+    .load-error {
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--color-text-secondary);
+      border: 1px dashed var(--color-border-tertiary);
+      border-radius: 8px;
+      background: var(--color-background-secondary);
+      padding: 28px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .load-error strong {
+      display: block;
+      color: var(--color-text-danger);
+      margin-bottom: 6px;
+    }
+
+    .playbook-mount .ci-app {
+      padding: 0;
+    }
+
+    .playbook-mount .ci-bar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding-bottom: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9));
+    }
+
+    .playbook-mount .ci-brand {
+      font-weight: 740;
+      color: var(--color-text-primary);
+    }
+
+    .playbook-mount .ci-search {
+      min-height: 46px;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 8px;
+      padding: 0 14px;
+      background: #fff;
+      color: var(--color-text-primary);
+      font: inherit;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .playbook-mount .ci-search:focus {
+      border-color: #50a89f;
+      box-shadow: 0 0 0 4px rgba(80, 168, 159, 0.14);
+    }
+
+    .playbook-mount .ci-cat,
+    .playbook-mount .ci-pain-item,
+    .playbook-mount .ci-use,
+    .playbook-mount .ci-hero {
+      border-radius: 8px;
+    }
+
+    .playbook-mount .ci-cat-head,
+    .playbook-mount .ci-ind-row,
+    .playbook-mount .ci-back {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .playbook-mount .ci-cat-head:focus-visible,
+    .playbook-mount .ci-ind-row:focus-visible,
+    .playbook-mount .ci-back:focus-visible {
+      outline: 3px solid rgba(80, 168, 159, 0.25);
+      outline-offset: -3px;
+    }
+
+    @media (max-width: 900px) {
+      .site-shell {
+        width: min(100% - 24px, 720px);
+        grid-template-columns: 1fr;
+        padding: 14px 0 22px;
+      }
+
+      .site-rail {
+        position: static;
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .status-panel {
+        display: none;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .playbook-surface {
+        min-height: 560px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .site-shell {
+        width: 100%;
+        padding: 0;
+        gap: 0;
+      }
+
+      .brand-lockup,
+      .advisor,
+      .metric-grid,
+      .topbar,
+      .playbook-surface {
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .brand-lockup {
+        padding: 18px 16px 14px;
+      }
+
+      .advisor {
+        grid-template-columns: 58px 1fr;
+        padding: 12px 16px;
+      }
+
+      .advisor img {
+        width: 58px;
+        height: 58px;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        padding: 10px 12px;
+      }
+
+      .metric {
+        min-height: 66px;
+        padding: 10px 8px;
+      }
+
+      .metric strong {
+        font-size: 20px;
+      }
+
+      .metric span {
+        font-size: 10px;
+      }
+
+      .workspace {
+        gap: 0;
+      }
+
+      .topbar {
+        min-height: auto;
+        padding: 14px 16px;
+      }
+
+      .topbar-chip {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .playbook-surface {
+        padding: 14px;
+      }
+
+      .playbook-mount {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="site-rail" aria-label="Playbook profile">
+      <section class="brand-lockup">
+        <p class="eyebrow">Capital Infusion</p>
+        <h1>Industry Playbook</h1>
+        <p class="deck">Discovery prompts, sector pressure points, and funding use cases for fast sales calls.</p>
+      </section>
+
+      <section class="advisor" aria-label="Advisor profile">
+        <img src="./danielp-profile-img.PNG" alt="Daniel P. profile photo" width="148" height="148">
+        <div>
+          <p class="advisor-name">Daniel P.</p>
+          <p class="advisor-role">Capital Infusion sales desk</p>
+        </div>
+      </section>
+
+      <section class="metric-grid" aria-label="Playbook coverage">
+        <div class="metric">
+          <strong>22</strong>
+          <span>Industries</span>
+        </div>
+        <div class="metric">
+          <strong>7</strong>
+          <span>Categories</span>
+        </div>
+        <div class="metric">
+          <strong>1</strong>
+          <span>Verified baseline</span>
+        </div>
+      </section>
+
+      <section class="status-panel" aria-label="Call workflow">
+        <h2>Call Stack</h2>
+        <ul class="status-list">
+          <li><i class="ti ti-search" aria-hidden="true"></i><span>Industry lookup</span></li>
+          <li><i class="ti ti-message-question" aria-hidden="true"></i><span>Pain hooks and questions</span></li>
+          <li><i class="ti ti-cash" aria-hidden="true"></i><span>Use-of-funds angles</span></li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div class="topbar-title">
+          <p>Live desk view</p>
+          <h2>Capital Infusion sales-rep playbook</h2>
+        </div>
+        <span class="topbar-chip"><i class="ti ti-cloud-upload" aria-hidden="true"></i> Vercel-ready static site</span>
+      </header>
+
+      <section class="playbook-surface" aria-label="Interactive industry playbook">
+        <div id="playbookMount" class="playbook-mount">
+          <div class="loading">Loading playbook...</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (async function mountPlaybook() {
+      var mount = document.getElementById("playbookMount");
+
+      function showError(message) {
+        mount.innerHTML = '<div class="load-error"><div><strong>Playbook did not load.</strong><span>' + message + '</span></div></div>';
+      }
+
+      try {
+        var fragmentUrl = new URL("capital_infusion_playbook_mobile_v2.html", window.location.href);
+        var response = await fetch(fragmentUrl, { cache: "no-store" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        var template = document.createElement("template");
+        template.innerHTML = await response.text();
+        var scripts = Array.prototype.slice.call(template.content.querySelectorAll("script"));
+        scripts.forEach(function(script) {
+          script.remove();
+        });
+
+        mount.innerHTML = "";
+        mount.appendChild(template.content.cloneNode(true));
+
+        scripts.forEach(function(oldScript) {
+          var script = document.createElement("script");
+          script.text = oldScript.textContent;
+          document.body.appendChild(script);
+        });
+      } catch (error) {
+        showError("Serve this folder over HTTP, then refresh. Details: " + (error && error.message ? error.message : String(error)));
+      }
+    })();
+  </script>
+</body>
+</html>
