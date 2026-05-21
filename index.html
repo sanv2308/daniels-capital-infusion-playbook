@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Capital Infusion industry playbook for sales discovery, pain hooks, qualifying questions, and use-of-funds positioning.">
+  <meta name="description" content="Capital Infusion industry playbook for simple sales call prompts, quick questions, and funding ideas.">
   <title>Capital Infusion Playbook</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -653,6 +653,14 @@
       }
 
       .command-bar,
+      .intro-module,
+      .advisor-module,
+      .stat-module,
+      .workflow-module,
+      .module-kicker {
+        display: none;
+      }
+
       .module {
         border-left: 0;
         border-right: 0;
@@ -660,41 +668,25 @@
         box-shadow: none;
       }
 
-      .command-bar {
-        margin-bottom: 0;
-      }
-
       .module-board {
-        grid-template-columns: 1fr;
+        display: block;
         gap: 0;
       }
 
-      .advisor-module {
-        grid-template-columns: 58px 1fr;
-      }
-
-      .advisor-module img {
-        width: 58px;
-        height: 58px;
-      }
-
-      .stat-module {
-        min-height: 98px;
-      }
-
       .playbook-module {
-        min-height: 620px;
-        padding: 14px;
+        min-height: 100vh;
+        padding: 10px;
+        border: 0;
+        background: transparent;
       }
 
-      .module-kicker {
-        align-items: flex-start;
-        flex-direction: column;
+      .playbook-mount {
+        min-height: 100vh;
       }
 
-      .status-pill {
-        width: 100%;
-        justify-content: center;
+      .playbook-frame {
+        min-height: 100vh;
+        height: 100vh;
       }
     }
   </style>
@@ -714,7 +706,7 @@
       <section class="module intro-module" aria-label="Playbook overview">
         <p class="eyebrow">Capital Infusion</p>
         <h1>Industry Playbook</h1>
-        <p class="deck">A sales desk for matching business pressure points to funding conversations, built around fast lookup and clean call flow.</p>
+        <p class="deck">A sales desk for spotting the cash problem, asking the next question, and keeping the call moving.</p>
       </section>
 
       <section class="module advisor-module" aria-label="Advisor profile">
@@ -744,17 +736,17 @@
       <section class="module workflow-module" aria-label="Call workflow">
         <h2 class="module-title">Call Stack</h2>
         <ul class="workflow-list">
-          <li><i class="ti ti-search" aria-hidden="true"></i><span>Search by industry, pain point, or use of funds.</span></li>
-          <li><i class="ti ti-message-question" aria-hidden="true"></i><span>Open a sector and lead with the strongest rapport line.</span></li>
-          <li><i class="ti ti-cash" aria-hidden="true"></i><span>Map the cash gap to a specific funding use case.</span></li>
+          <li><i class="ti ti-search" aria-hidden="true"></i><span>Find the business type.</span></li>
+          <li><i class="ti ti-message-question" aria-hidden="true"></i><span>Use the opening line if it fits.</span></li>
+          <li><i class="ti ti-cash" aria-hidden="true"></i><span>Ask what they need money for.</span></li>
         </ul>
       </section>
 
       <section class="module playbook-module" aria-label="Interactive industry playbook">
         <div class="module-kicker">
           <div>
-            <p>Live desk view</p>
-            <h2>Industry discovery module</h2>
+            <p>Call view</p>
+            <h2>Industry playbook</h2>
           </div>
           <span class="status-pill"><i class="ti ti-device-mobile-search" aria-hidden="true"></i> Interactive</span>
         </div>
