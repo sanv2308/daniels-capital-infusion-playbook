@@ -391,8 +391,10 @@ body::after {
   scrollbar-width: none;
 }
 .pulse-rail--h::-webkit-scrollbar { display: none; }
-.pulse-rail--h .pulse-step { padding: 8px 12px; border-radius: var(--radius-pill); flex-shrink: 0; min-height: 40px; }
+.pulse-rail--h .pulse-step { padding: 8px 6px; border-radius: var(--radius-pill); flex: 1; justify-content: center; gap: 7px; min-height: 40px; }
 .pulse-rail--h .pulse-step__sub { display: none; }
+.pulse-rail--h .pulse-step__name { display: none; font-size: 0.82rem; }
+.pulse-rail--h .pulse-step[data-state="current"] .pulse-step__name { display: inline; }
 .pulse-rail--h .pulse-step__letter { width: 24px; height: 24px; font-size: 1rem; }
 
 /* ---------- 9 · gates + verdicts ---------- */
@@ -655,6 +657,9 @@ input[type="range"]::-moz-range-thumb {
   align-items: start;
 }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.masonry { columns: 2; column-gap: 1.25rem; }
+.masonry__item { break-inside: avoid; margin-bottom: 1.25rem; display: block; }
+@media (max-width: 720px) { .masonry { columns: 1; } }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 .stack { display: grid; gap: 1.25rem; }
 .stack-lg { display: grid; gap: 2.25rem; }
