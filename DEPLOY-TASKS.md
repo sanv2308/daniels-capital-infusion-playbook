@@ -1,16 +1,18 @@
-# DEPLOY-TASKS — human steps only
+# DEPLOY-TASKS
 
-The site builds clean (`npm run build`) and is pushed to
-`github.com/sanv2308/daniels-capital-infusion-playbook` (main). Vercel steps:
+**Status: deployed.** Live at https://daniels-playbook.vercel.app — the
+Vercel project `daniels-playbook` builds from
+`github.com/sanv2308/daniels-capital-infusion-playbook` (main). The framework
+preset was switched from "Other" (old static site) to **Next.js**; every push
+to main now auto-deploys production.
 
-1. **If the repo is already connected to Vercel** (it had a `vercel.json`
-   static deploy): open the Vercel project → Settings → General → Framework
-   Preset must now read **Next.js** (auto-detected). If it still says "Other",
-   set it to Next.js and redeploy. Build command `next build`, output default.
-2. **If not connected**: vercel.com → Add New Project → import
-   `daniels-capital-infusion-playbook` → accept the Next.js defaults → Deploy.
+Remaining human steps (optional):
+
+1. Custom domain: Vercel project → Settings → Domains, if the team wants one.
+2. Access control: the playbook is competitive material on a public URL and a
+   PUBLIC GitHub repo. Consider making the repo private and enabling Vercel
+   Deployment Protection (password/SSO) — Settings → Deployment Protection.
 3. No environment variables are required — the site is fully static content.
-4. After first deploy, check `/call?p=2` and `/industries/trucking` render.
 
 Local dev:
 
