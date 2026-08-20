@@ -1,0 +1,328 @@
+<style>
+.ci-app { font-family: var(--font-sans); color: var(--color-text-primary); padding: 1rem 0; }
+.ci-bar { margin-bottom: 1rem; }
+.ci-brand { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 8px; letter-spacing: 0.02em; }
+.ci-brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-text-info); display: inline-block; margin-right: 6px; vertical-align: middle; }
+.ci-search { width: 100%; }
+.ci-err { background: var(--color-background-danger); color: var(--color-text-danger); padding: 12px; border-radius: var(--border-radius-md); font-size: 13px; margin-bottom: 12px; }
+.ci-cat { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); margin-bottom: 8px; overflow: hidden; }
+.ci-cat-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; background: var(--color-background-primary); }
+.ci-cat-head:hover { background: var(--color-background-secondary); }
+.ci-cat-icon { font-size: 18px; color: var(--color-text-info); }
+.ci-cat-name { flex: 1; font-size: 14px; font-weight: 500; }
+.ci-cat-count { font-size: 11px; color: var(--color-text-tertiary); }
+.ci-cat-chev { font-size: 16px; color: var(--color-text-tertiary); transition: transform 0.15s; }
+.ci-cat.open .ci-cat-chev { transform: rotate(90deg); }
+.ci-cat-body { border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+.ci-ind-row { padding: 11px 14px 11px 36px; font-size: 13px; cursor: pointer; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; gap: 8px; }
+.ci-ind-row:last-child { border-bottom: none; }
+.ci-ind-row:hover { background: var(--color-background-primary); }
+.ci-ind-name { flex: 1; }
+.ci-ind-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: var(--color-background-success); color: var(--color-text-success); }
+.ci-back { font-size: 13px; color: var(--color-text-info); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 1rem; }
+.ci-back:hover { text-decoration: underline; }
+.ci-h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px 0; }
+.ci-sub { font-size: 12px; color: var(--color-text-tertiary); margin: 0 0 1.25rem 0; text-transform: lowercase; letter-spacing: 0.02em; }
+.ci-h2 { font-size: 12px; font-weight: 500; margin: 0 0 8px 0; color: var(--color-text-secondary); text-transform: lowercase; letter-spacing: 0.05em; }
+.ci-hero { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; margin-bottom: 1rem; }
+.ci-hero-label { font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 6px 0; text-transform: lowercase; letter-spacing: 0.05em; }
+.ci-hero-text { font-size: 14px; line-height: 1.5; margin: 0; }
+.ci-rapport { font-family: var(--font-serif); font-size: 14px; line-height: 1.55; border-left: 2px solid var(--color-border-info); padding-left: 12px; margin: 0 0 1.25rem 0; font-style: italic; }
+.ci-section { margin-bottom: 1.25rem; }
+.ci-pain-item { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 12px; margin-bottom: 6px; }
+.ci-pain-label { font-size: 13px; font-weight: 500; margin: 0 0 4px 0; line-height: 1.4; }
+.ci-pain-ask { font-size: 12px; color: var(--color-text-secondary); margin: 0; font-style: italic; line-height: 1.4; }
+.ci-list { list-style: none; padding: 0; margin: 0; }
+.ci-list li { padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; line-height: 1.45; display: flex; gap: 8px; }
+.ci-list li:last-child { border-bottom: none; }
+.ci-list .num { color: var(--color-text-tertiary); font-variant-numeric: tabular-nums; min-width: 18px; }
+.ci-use { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 9px 12px; font-size: 13px; line-height: 1.4; margin-bottom: 6px; }
+.ci-note { font-size: 11px; color: var(--color-text-tertiary); margin-top: 1.5rem; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary); display: flex; gap: 6px; align-items: flex-start; line-height: 1.45; }
+.ci-empty { text-align: center; padding: 2rem 0; color: var(--color-text-tertiary); font-size: 13px; }
+</style>
+
+<h2 class="sr-only">Capital Infusion sales-rep playbook prototype with collapsible industry categories.</h2>
+
+<div class="ci-app" id="ciApp">
+  <div class="ci-bar">
+    <div class="ci-brand"><span class="ci-brand-dot"></span>capital infusion · industry playbook</div>
+    <input class="ci-search" type="text" id="ciSearch" placeholder="search industries, pain points..." />
+  </div>
+  <div class="ci-err" id="ciErr" style="display:none;"></div>
+  <div id="ciMain"></div>
+</div>
+
+<script>
+(function(){
+try {
+
+var CATEGORIES = [
+  {id:"building",name:"Building trades",icon:"ti-tool"},
+  {id:"transport",name:"Transportation & logistics",icon:"ti-truck"},
+  {id:"food",name:"Food & hospitality",icon:"ti-chef-hat"},
+  {id:"local",name:"Local services",icon:"ti-scissors"},
+  {id:"health",name:"Healthcare",icon:"ti-stethoscope"},
+  {id:"retail",name:"Retail & commerce",icon:"ti-building-store"},
+  {id:"industrial",name:"Industrial & agricultural",icon:"ti-building-factory-2"}
+];
+
+var INDUSTRIES = {
+  construction: { name:"Construction", category:"building",
+    hero:"~700K US general contractors. Highly fragmented, most under $1M revenue. Progress-billing model creates persistent cash gaps between draws.",
+    rapport:"Most GCs I talk to are floating material and payroll for 30-60 days before the next draw lands. That your situation?",
+    pains:[["Progress-billing draw delays","How long between when you submit a draw and get paid?"],["Material price swings (lumber, steel, concrete)","How are you locking in material costs on bids?"],["Change-order disputes tying up cash","Got any change orders sitting unapproved right now?"],["Labor shortage, paying premium to keep crews","How are you handling crew availability this season?"]],
+    quals:["Residential, commercial, or mix?","Avg project ticket and length?","How many active jobs right now?","Crew size, W-2 or 1099?","Bonding capacity and current backlog?"],
+    uses:["Material upfront for new jobs","Payroll between draws","Equipment purchase or repair","Bond / insurance premium financing","Expansion: new crew or truck"] },
+  roofing: { name:"Roofing", category:"building",
+    hero:"~100K US roofing contractors, $50B+ industry. Weather and storm cycles drive lumpy revenue. Insurance-claim work creates 60-120 day pay cycles.",
+    rapport:"Storm work pays well but insurance carriers take forever. How are you covering material and labor in the meantime?",
+    pains:[["Insurance claim pay cycles (60-120 days)","How long is your average insurance claim taking to settle?"],["Asphalt and shingle price volatility","How much have material costs moved on you this year?"],["Seasonal demand swings","What does your winter cash position look like?"],["Crew availability for storm surges","Can you scale crews up fast when storms hit?"]],
+    quals:["Residential or commercial mix?","Storm/insurance work vs retail?","Crew count and subs?","Avg ticket size?","Time in business?"],
+    uses:["Material upfront for big jobs","Payroll bridge to insurance pay","Trucks and equipment","Marketing for storm season","Office / sales hiring"] },
+  hvac: { name:"HVAC", category:"building",
+    hero:"~120K US HVAC contractors. Demand peaks summer and winter. Spring and fall are cash troughs. Equipment and refrigerant costs rising.",
+    rapport:"Spring and fall are usually the squeeze months for HVAC. How are you handling the off-season right now?",
+    pains:[["Seasonal cash troughs (spring, fall)","How do you manage payroll in the slow months?"],["Refrigerant and equipment cost increases","Have you seen unit prices climb this year?"],["Technician shortage","Are you fully staffed on techs, or running short?"],["Service vs install revenue mix","What is your service-versus-install split?"]],
+    quals:["Residential, commercial, or mix?","Service vs install split?","Number of techs and trucks?","Avg ticket size?","Maintenance plan subscribers?"],
+    uses:["Pre-season inventory (units, parts)","Off-peak payroll","Fleet vehicles","Marketing for peak season","Software / dispatch upgrades"] },
+  plumbing: { name:"Plumbing", category:"building",
+    hero:"~130K US plumbing contractors, $130B industry. Mostly small and owner-operated. Emergency work and new construction are different businesses.",
+    rapport:"Most plumbing shops I work with are juggling service calls and rough-in work. Which side is bigger for you?",
+    pains:[["Emergency-driven irregular cashflow","How predictable is your weekly revenue?"],["Material cost (copper, PEX, fixtures)","Have you seen material prices spike recently?"],["Truck inventory tying up cash","How much inventory are you carrying on each truck?"],["Collections on small residential jobs","Any aged receivables you are chasing?"]],
+    quals:["Service/repair vs new construction?","Residential or commercial?","How many techs and trucks?","Avg invoice size?","Licensed master plumbers on staff?"],
+    uses:["Truck stock inventory","New service trucks","Equipment (drain cameras, jetters)","Payroll bridge","Expansion"] },
+  electrical: { name:"Electrical", category:"building",
+    hero:"~70K US electrical contractors, $200B industry. Commercial jobs lock up capital. EV and solar driving new demand.",
+    rapport:"Electrical is an interesting moment. EV charging and solar are opening up, but big jobs eat your cash. Where are you on that?",
+    pains:[["Copper and material cost swings","How are copper prices treating you this year?"],["Permit and inspection delays","Got any jobs stuck waiting on inspection?"],["Large project capital lockup","What is your biggest job currently in progress?"],["Licensed electrician shortage","Fully staffed on licensed guys?"]],
+    quals:["Residential / commercial / industrial mix?","EV charger or solar install work?","Number of licensed electricians?","Avg project size?","AR aging?"],
+    uses:["Material upfront","Payroll bridge on big jobs","EV / solar install equipment","Vehicles","Expansion"] },
+  landscaping: { name:"Landscaping", category:"building",
+    hero:"~600K US landscaping firms, $150B industry. Highly seasonal outside of FL/CA/TX. Equipment-heavy capital structure.",
+    rapport:"In Miami you guys can run year-round but most folks I talk to still hit seasonal lulls. How does your year shape up?",
+    pains:[["Weather-driven revenue swings","How does your monthly revenue look across the year?"],["Equipment maintenance and replacement","Anything in your fleet due for replacement?"],["Labor (H-2B visas, retention)","Are you fully crewed up right now?"],["Client churn / contract renewals","How sticky are your residential contracts?"]],
+    quals:["Residential / commercial / municipal mix?","Mowing vs hardscape vs design-build?","Crew count and trucks?","Peak season weekly revenue?","Recurring contracts vs one-time?"],
+    uses:["New equipment (mowers, trucks)","Winter / slow-season payroll","Fuel reserves","Marketing pre-season","Expansion crews"] },
+  construction_supply: { name:"Construction equipment & supply", category:"building",
+    hero:"Thousands of independent suppliers and dealers. Inventory-heavy. Contractor customers pay slow (60-120 days), squeezing you in the middle.",
+    rapport:"You are paying suppliers fast but contractors pay you slow. Pretty universal pain. Where do you sit on AR right now?",
+    pains:[["Inventory carry cost","How much inventory are you sitting on at any given time?"],["Contractor payment cycles (60-120 days)","What is your average days-to-pay from contractor customers?"],["Equipment / inventory price volatility","How are manufacturer price changes hitting you?"],["Concentration risk on top customers","How much of your AR is in your top 5 accounts?"]],
+    quals:["Rental vs sale mix?","Categories carried (heavy equip, hand tools, materials)?","AR aging, % over 60 days?","Top customer concentration?","Warehouse and yard footprint?"],
+    uses:["Inventory restock","AR financing","Fleet for delivery","Warehouse expansion","Software / inventory systems"] },
+  trucking: { name:"Trucking", category:"transport", validated:true,
+    hero:"~580K active US carriers. 91.5% run 10 trucks or fewer. Industry mid-freight-recession, revenue dropped from $1T (2023) to $906B (2024), with 5-8K carriers exiting in 2025.",
+    rapport:"I work with a lot of small carriers. Most folks are running under 10 trucks, getting squeezed between fuel and broker pay. Sound like your world?",
+    pains:[["Broker pay cycles 30-90 days","How long are you waiting on broker payments right now?"],["Fuel cost volatility (~$4/gal diesel)","How are you handling fuel swings this quarter?"],["Surprise repairs ($4K-$15K transmissions)","When something breaks unexpectedly, where does that money come from?"],["Insurance premium creep","What is your insurance running monthly, up from last year?"],["Driver payroll pressure","How are you covering payroll between long-haul payment gaps?"]],
+    quals:["How many power units? Owned or leased?","For-hire or private fleet? Interstate or intrastate?","Factoring already? Who, what rate?","Avg days-to-pay on receivables?","Annual revenue ballpark vs last year?","How long have you had USDOT authority?"],
+    uses:["Fuel reserves / bridge to broker pay","Equipment repair (avoid downtime)","New tractor or trailer (30-50% down)","Insurance premium financing","Driver payroll bridge","Adding power units (expansion)"] },
+  logistics: { name:"Logistics & freight brokerage", category:"transport",
+    hero:"~25K licensed freight brokers in US, $200B+ industry. Margin-compressed in the freight recession. Carrier prepay obligations vs slow shipper pay equals classic squeeze.",
+    rapport:"Most brokers I talk to are paying carriers in 2-7 days but waiting 30-60 from shippers. What does your gap look like?",
+    pains:[["Carrier prepay vs shipper net-30/60","Are you running quick-pay programs with carriers?"],["Margin compression","How tight are your loaded margins this quarter?"],["Bond and insurance requirements","Any bond renewal coming up?"],["Shipper concentration risk","What is your top 3 shipper % of revenue?"]],
+    quals:["Number of active carriers in network?","Avg margin per load?","Monthly load volume?","Top shipper concentration?","Factoring or AR line currently?"],
+    uses:["Carrier prepay financing","Working capital between shipper invoices","Sales / dispatch hiring","Tech (TMS upgrade)","Marketing"] },
+  restaurant: { name:"Restaurant", category:"food",
+    hero:"~750K US restaurants, $1T+ industry. ~60% close within 3 years. Razor-thin margins, food and labor cost volatility, credit card holds.",
+    rapport:"Restaurants are brutal. Food cost, labor cost, card holds all at once. What hurts most for you right now?",
+    pains:[["Food cost volatility","How are food costs running vs last year?"],["Labor cost and turnover","How are you handling staffing right now?"],["Credit card processing holds","How fast does your processor pay out?"],["Equipment breakdowns (walk-in, ovens)","When equipment goes down, what is the play?"]],
+    quals:["Dine-in, QSR, delivery-heavy?","Number of locations?","Avg daily revenue?","POS system?","Time in business at this location?"],
+    uses:["Equipment (ovens, walk-ins, POS)","Payroll bridge","Marketing / delivery platform fees","Renovation / build-out","New location"] },
+  bars: { name:"Bars & nightclubs", category:"food",
+    hero:"~70K bars and clubs in US. Heavily event-driven, Miami especially. Licensing burden, peak/off-peak swings, security and insurance costs.",
+    rapport:"In Miami the season makes or breaks the year. How does your weekly card volume look between season and summer?",
+    pains:[["Liquor license and compliance costs","Any licensing renewals coming up?"],["Event-driven revenue swings","How different is your peak week vs slow week?"],["Security and insurance premiums","What is insurance running you monthly?"],["Peak season prep capital","How are you stocking up for the next big weekend?"]],
+    quals:["Bar, club, or lounge concept?","Capacity?","Weekly card volume?","% revenue on weekends vs weeknights?","Seasonality, full year or seasonal?"],
+    uses:["Liquor inventory pre-event","Payroll (security, bartenders)","Sound, lighting, AV upgrades","Marketing / promoter fees","Renovation"] },
+  hotels: { name:"Hotels & hospitality", category:"food",
+    hero:"~60K US hotels. Tourism-dependent, Miami highly seasonal. OTA fees (15-30%) and renovation cycles eat margin.",
+    rapport:"Miami hotels live and die by the season. And OTA fees are brutal. Where are you on those right now?",
+    pains:[["OTA fees (15-30% of bookings)","What is your direct booking % vs OTA?"],["Seasonal occupancy swings","How does your ADR and occupancy look month-by-month?"],["Renovation / FF&E cycles","When was your last major renovation?"],["Labor (housekeeping, front desk)","Fully staffed right now?"]],
+    quals:["Room count?","ADR and occupancy?","Brand-flagged or independent?","Direct booking % vs OTA?","Last renovation date?"],
+    uses:["Renovation / FF&E","Off-season payroll","Marketing for direct bookings","Tech (PMS, channel manager)","Expansion"] },
+  spa: { name:"Spa", category:"local",
+    hero:"~25K US spas, $20B industry. High-touch consumer-facing. Therapist retention and retail product attach are the levers.",
+    rapport:"Spa business is part services, part retail. Where are you stronger right now?",
+    pains:[["Therapist retention and comp disputes","How are you handling therapist comp right now?"],["Retail product inventory carry","How is retail attach trending?"],["Seasonality / tourism dependency","How does your tourist vs local mix look?"],["Equipment costs (lasers, cryo, tables)","Any equipment upgrades planned?"]],
+    quals:["Day spa, destination, or medspa?","Number of therapists / providers?","Service vs retail revenue mix?","Average ticket size?","Membership program?"],
+    uses:["Equipment (lasers, beds, technology)","Retail inventory","Marketing / loyalty program","Build-out / second location","Software (booking, CRM)"] },
+  salons: { name:"Salons & barbershops", category:"local",
+    hero:"~270K US salons + ~140K barbershops. Mostly owner-operated. Booth-rent vs commission models change the financial story.",
+    rapport:"You running booth rent or commission? Big difference in how the money flows.",
+    pains:[["Stylist retention / poaching","How sticky are your stylists right now?"],["Product inventory and retail attach","How much retail are you moving?"],["Walk-in vs booked balance","What is your booking rate looking like?"],["Marketing in saturated local market","How is new client acquisition?"]],
+    quals:["Salon or barbershop?","Chair count and stylist count?","Booth rent or commission?","Weekly card volume?","Retail product line?"],
+    uses:["Equipment (chairs, washing stations)","Build-out / expansion","Retail inventory","Marketing (Instagram, local ads)","Software (booking)"] },
+  gyms: { name:"Gyms & fitness", category:"local",
+    hero:"~110K US gyms and studios, $35B industry. Membership recurring revenue is the lever, but January spike fades by spring.",
+    rapport:"Most gym owners I talk to know the January-to-April drop hits hard. How are you handling that cycle?",
+    pains:[["Member churn (post-January cliff)","How is retention looking 90 days in?"],["Equipment maintenance and replacement","Anything on your floor due for replacement?"],["Lease and rent escalation","When does your lease come up?"],["Trainer payroll vs revenue lag","How is the trainer-comp math working out?"]],
+    quals:["Big box, boutique, CrossFit, or specialty?","Active members?","Monthly recurring revenue?","Square footage?","Trainer model (W-2 or 1099)?"],
+    uses:["New equipment","Build-out / second location","Marketing (Jan / fall campaigns)","Software (member app, billing)","Trainer payroll bridge"] },
+  auto_repair: { name:"Auto repair & body shops", category:"local",
+    hero:"~165K US auto repair shops, $130B industry. Mostly small independents. Diagnostic equipment cost rising fast as cars get more complex.",
+    rapport:"Cars are getting harder to fix without expensive diagnostic gear. Where are you on that investment cycle?",
+    pains:[["Diagnostic equipment costs (rising)","What is your scan tool / equipment investment looking like?"],["Tech shortage / certifications","Fully staffed on certified techs?"],["Parts inventory + supplier markup","How are parts costs trending?"],["Insurance billing on body work (slow pay)","Got insurance receivables sitting?"]],
+    quals:["General repair, specialty, or body shop?","Number of bays?","Number of techs (ASE-certified)?","Weekly repair orders?","Insurance work %?"],
+    uses:["Diagnostic equipment","Lifts, tools, alignment racks","Parts inventory","Build-out / bay addition","Marketing"] },
+  medical: { name:"Medical & dental practices", category:"health",
+    hero:"~230K US dental practices + ~230K physician offices. Insurance reimbursement gaps (30-90 days) drive working-capital need. Equipment runs $M+ for specialties.",
+    rapport:"Insurance is the killer. You do the work today, get paid in 60+ days. Where are you on AR right now?",
+    pains:[["Insurance reimbursement delays","How long are you waiting on insurance pay?"],["Equipment costs (chairs, imaging, lasers)","Anything you need to upgrade in your operatories?"],["Staff costs (hygienists, MAs)","How is staffing, fully covered?"],["Compliance / credentialing burden","Any new credentialing coming up?"]],
+    quals:["Specialty (GP dental, ortho, GP medical, specialty)?","Number of providers?","Insurance vs cash mix?","In-network with which carriers?","Equipment age?"],
+    uses:["Equipment financing (chairs, imaging, lasers)","Working capital between reimbursements","Build-out for new operatory or location","Payroll","Software (EHR, PMS)"] },
+  retail: { name:"Retail (storefront)", category:"retail",
+    hero:"~1M+ US retail establishments. E-comm pressure squeezing margins. Inventory carry, seasonal cycles, and rent are the big three.",
+    rapport:"Storefront retail is tougher every year with online. What is your traffic and conversion story?",
+    pains:[["Inventory carry pre-season","How are you funding the holiday/seasonal stock-up?"],["Foot traffic decline / e-comm pressure","How is foot traffic trending?"],["Landlord / rent escalation","Lease renewal coming up?"],["Card processing fees","What is your processor charging?"]],
+    quals:["Product category?","Square footage and # locations?","Monthly card volume?","Online presence, Shopify, marketplace?","Seasonal vs year-round?"],
+    uses:["Inventory pre-season","Build-out / refresh","Marketing (digital + local)","New location","POS / e-comm tech"] },
+  ecommerce: { name:"E-commerce / online sellers", category:"retail",
+    hero:"2M+ active US Amazon sellers + 4M+ Shopify stores. Ad cost inflation and Amazon payout holds are the universal pains.",
+    rapport:"Amazon holds your money 14-21 days, ad costs keep climbing. How are you funding inventory between cycles?",
+    pains:[["Amazon payout holds (14-21 days)","How much cash do you have stuck in Amazon at any time?"],["Ad cost inflation (Meta, Google)","What is your CAC trend?"],["Inventory tied up in 3PL","How much inventory do you have in warehouses?"],["Marketplace seasonality (Q4 spike)","How are you preparing for Q4?"]],
+    quals:["Marketplace mix (Amazon, Shopify, Walmart)?","Monthly revenue?","Ad spend % of revenue?","COGS %?","Sourcing, domestic or import?"],
+    uses:["Inventory restock for peak / Q4","Ad spend scaling","Software / automation","New marketplace expansion","Sourcing prepay (China deposits)"] },
+  cstore: { name:"Gas stations & convenience stores", category:"retail",
+    hero:"~150K US c-stores (including gas). Razor-thin margins on fuel (cents per gallon). Cigarette and lotto inventory ties up significant cash.",
+    rapport:"Fuel margins are paper-thin. Most owners I talk to make their money inside the store. Same for you?",
+    pains:[["Thin fuel margins","How is the fuel-margin spread treating you?"],["Tank and pump compliance / upgrades","Any UST or pump upgrades on the horizon?"],["Cigarette and lottery inventory carry","How much inventory cash sits in cigarettes and lotto?"],["Shrink / theft","How is shrink trending?"]],
+    quals:["Gallons per month?","Inside-store vs fuel revenue split?","Number of locations?","Fuel brand or unbranded?","Lotto / ATM in store?"],
+    uses:["Tank or pump upgrades","Store remodel","Inside-store inventory","ATM / lotto integration","New location"] },
+  manufacturing: { name:"Manufacturing", category:"industrial",
+    hero:"~250K US manufacturing firms, $2.5T sector. Raw material volatility + 60-90 day customer AR + equipment downtime = persistent working capital need.",
+    rapport:"Manufacturing is the classic squeeze. Buy raw fast, get paid slow. Where are you on AR right now?",
+    pains:[["Raw material cost swings","How are raw input costs treating you?"],["Equipment downtime / breakdowns","When a line goes down, what is the impact?"],["Customer AR (60-90 days)","What is your DSO looking like?"],["Skilled labor shortage","How is your skilled labor pipeline?"]],
+    quals:["Industry served (auto, food, defense, consumer)?","Contract vs custom production?","Number of employees / shifts?","AR aging?","Equipment age?"],
+    uses:["Raw material purchase","Equipment / line upgrades","AR financing","Expansion (second shift, new line)","Working capital"] },
+  agriculture: { name:"Agricultural business", category:"industrial",
+    hero:"~2M US farms, $400B industry. Seasonal capital cycle. Heavy spend pre-planting, payment at harvest. Weather is wild card.",
+    rapport:"You spend in the spring, hope to get paid in the fall. What does this year's cycle look like for you?",
+    pains:[["Weather risk on yield","How is weather treating you this season?"],["Input costs (seed, feed, fuel, fertilizer)","How are input costs vs last year?"],["Harvest-to-payment gap","When is your next payment landing?"],["Equipment costs","Anything on your equipment list to upgrade?"]],
+    quals:["Crop, livestock, specialty, or mixed?","Acres or head?","Harvest / sale timing?","Equipment age?","Crop insurance and contracts?"],
+    uses:["Pre-season inputs (seed, feed, fertilizer, fuel)","Equipment (tractors, irrigation, combines)","Harvest payroll","Storage / silo upgrades","Land expansion"] }
+};
+
+var state = { view:"home", industryId:null, openCats:{}, query:"" };
+
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+function industriesByCat(catId) {
+  var out = [];
+  for (var k in INDUSTRIES) { if (INDUSTRIES[k].category === catId) out.push({key:k, ind:INDUSTRIES[k]}); }
+  return out;
+}
+
+function searchMatches(q) {
+  var lower = q.toLowerCase();
+  var out = [];
+  for (var k in INDUSTRIES) {
+    var v = INDUSTRIES[k];
+    var hit = false;
+    if (v.name.toLowerCase().indexOf(lower) >= 0) hit = true;
+    if (!hit && v.hero.toLowerCase().indexOf(lower) >= 0) hit = true;
+    if (!hit && v.pains.some(function(p){ return p[0].toLowerCase().indexOf(lower) >= 0; })) hit = true;
+    if (!hit && v.uses.some(function(u){ return u.toLowerCase().indexOf(lower) >= 0; })) hit = true;
+    if (hit) out.push({key:k, ind:v});
+  }
+  return out;
+}
+
+function renderHome() {
+  var html = "";
+  if (state.query) {
+    var matches = searchMatches(state.query);
+    html += '<div class="ci-sub">search · "' + escapeHtml(state.query) + '" · ' + matches.length + ' match' + (matches.length===1?'':'es') + '</div>';
+    if (matches.length === 0) { html += '<div class="ci-empty">No matches.</div>'; return html; }
+    matches.forEach(function(m){
+      html += '<div class="ci-ind-row" data-action="industry" data-id="' + m.key + '" style="padding-left:14px;">';
+      html += '<span class="ci-ind-name">' + escapeHtml(m.ind.name) + '</span>';
+      if (m.ind.validated) html += '<span class="ci-ind-tag">researched</span>';
+      html += '<i class="ti ti-chevron-right" style="color:var(--color-text-tertiary);font-size:14px;"></i>';
+      html += '</div>';
+    });
+    return html;
+  }
+  CATEGORIES.forEach(function(c){
+    var inds = industriesByCat(c.id);
+    var isOpen = !!state.openCats[c.id];
+    html += '<div class="ci-cat' + (isOpen ? ' open' : '') + '">';
+    html += '<div class="ci-cat-head" data-action="toggle" data-id="' + c.id + '">';
+    html += '<i class="ci-cat-icon ti ' + c.icon + '" aria-hidden="true"></i>';
+    html += '<span class="ci-cat-name">' + escapeHtml(c.name) + '</span>';
+    html += '<span class="ci-cat-count">' + inds.length + '</span>';
+    html += '<i class="ci-cat-chev ti ti-chevron-right" aria-hidden="true"></i>';
+    html += '</div>';
+    if (isOpen) {
+      html += '<div class="ci-cat-body">';
+      inds.forEach(function(item){
+        html += '<div class="ci-ind-row" data-action="industry" data-id="' + item.key + '">';
+        html += '<span class="ci-ind-name">' + escapeHtml(item.ind.name) + '</span>';
+        if (item.ind.validated) html += '<span class="ci-ind-tag">researched</span>';
+        html += '<i class="ti ti-chevron-right" style="color:var(--color-text-tertiary);font-size:14px;"></i>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  return html;
+}
+
+function renderIndustry() {
+  var v = INDUSTRIES[state.industryId];
+  if (!v) return '<div class="ci-empty">Industry not found.</div>';
+  var cat = null;
+  CATEGORIES.forEach(function(c){ if (c.id === v.category) cat = c; });
+  var html = '';
+  html += '<div class="ci-back" data-action="back"><i class="ti ti-arrow-left" aria-hidden="true"></i> back to ' + escapeHtml(cat ? cat.name.toLowerCase() : 'all') + '</div>';
+  html += '<h1 class="ci-h1">' + escapeHtml(v.name) + '</h1>';
+  html += '<p class="ci-sub">' + escapeHtml(cat ? cat.name.toLowerCase() : '') + (v.validated ? ' · researched' : ' · v1 sketch') + '</p>';
+  html += '<div class="ci-hero"><p class="ci-hero-label">hero stat · lead with this</p><p class="ci-hero-text">' + escapeHtml(v.hero) + '</p></div>';
+  html += '<p class="ci-rapport">"' + escapeHtml(v.rapport) + '"</p>';
+  html += '<div class="ci-section"><h2 class="ci-h2">pain hooks → discovery questions</h2>';
+  v.pains.forEach(function(p){
+    html += '<div class="ci-pain-item"><p class="ci-pain-label">' + escapeHtml(p[0]) + '</p><p class="ci-pain-ask">ask: ' + escapeHtml(p[1]) + '</p></div>';
+  });
+  html += '</div>';
+  html += '<div class="ci-section"><h2 class="ci-h2">qualifying questions · size the deal</h2><ol class="ci-list">';
+  v.quals.forEach(function(q,i){ html += '<li><span class="num">' + (i+1) + '</span><span>' + escapeHtml(q) + '</span></li>'; });
+  html += '</ol></div>';
+  html += '<div class="ci-section"><h2 class="ci-h2">typical use of funds</h2>';
+  v.uses.forEach(function(u){ html += '<div class="ci-use">' + escapeHtml(u) + '</div>'; });
+  html += '</div>';
+  if (v.validated) {
+    html += '<div class="ci-note"><i class="ti ti-check" style="color:var(--color-text-success);font-size:13px;" aria-hidden="true"></i><span>Research-verified against ATA, FMCSA, FleetOwner, and industry sources (May 2026).</span></div>';
+  } else {
+    html += '<div class="ci-note"><i class="ti ti-info-circle" style="font-size:13px;" aria-hidden="true"></i><span>v1 content · directionally correct, not yet research-verified. Trucking is the validated baseline.</span></div>';
+  }
+  return html;
+}
+
+function render() {
+  var main = document.getElementById("ciMain");
+  if (state.view === "industry") main.innerHTML = renderIndustry();
+  else main.innerHTML = renderHome();
+}
+
+document.getElementById("ciApp").addEventListener("click", function(e){
+  var t = e.target.closest("[data-action]");
+  if (!t) return;
+  var action = t.dataset.action;
+  if (action === "toggle") { state.openCats[t.dataset.id] = !state.openCats[t.dataset.id]; render(); }
+  else if (action === "industry") { state.view = "industry"; state.industryId = t.dataset.id; render(); window.scrollTo(0,0); }
+  else if (action === "back") { state.view = "home"; state.industryId = null; render(); }
+});
+
+document.getElementById("ciSearch").addEventListener("input", function(e){
+  state.query = e.target.value.trim();
+  if (state.view === "industry") { state.view = "home"; state.industryId = null; }
+  render();
+});
+
+render();
+
+} catch (err) {
+  var ce = document.getElementById("ciErr");
+  if (ce) { ce.style.display = "block"; ce.textContent = "Render error: " + (err && err.message ? err.message : String(err)); }
+}
+})();
+</script>
