@@ -9,6 +9,9 @@ objection protocol (ARC), disposition codes (D1–D9), and 22 industry dossiers.
 - **Method + spec**: [PLAN.md](./PLAN.md).
 - **Deploy**: [DEPLOY-TASKS.md](./DEPLOY-TASKS.md).
 
+Design: the original carbon-fiber language (carbon hatch, chrome bevels,
+Manrope 800, blue-steel accent, champagne figures).
+
 Stack: Next.js App Router + TypeScript, one hand-rolled `app/globals.css`,
 zero animation/runtime deps. All content lives in typed data files
 (`data/*.ts`); all logic in pure functions (`lib/engine.ts`) so the same rules
