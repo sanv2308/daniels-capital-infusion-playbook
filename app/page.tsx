@@ -4,6 +4,7 @@ import { IndustryBrowser } from "@/components/IndustryBrowser";
 import { INDUSTRIES, CATEGORIES } from "@/data/industries";
 import { LANES } from "@/data/lanes";
 import { PULSE } from "@/data/method";
+import { LEADS } from "@/data/leads";
 
 export default function Home() {
   return (
@@ -27,6 +28,9 @@ export default function Home() {
                 and keeping the call moving.
               </p>
               <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
+                <Link href="/leads" className="btn btn--primary">
+                  <i className="ti ti-users" aria-hidden /> Work the 25 leads
+                </Link>
                 <Link href="/call" className="btn btn--primary">
                   <i className="ti ti-phone-call" aria-hidden /> Start a live call
                 </Link>
@@ -91,6 +95,15 @@ export default function Home() {
         {/* right column */}
         <div className="module-col">
           <Reveal>
+            <section className="card stat-module" aria-label="Prospect lead count">
+              <span className="tile"><i className="ti ti-user-dollar" aria-hidden /></span>
+              <div>
+                <strong>{LEADS.length}</strong>
+                <span>Prospect leads</span>
+              </div>
+            </section>
+          </Reveal>
+          <Reveal i={1}>
             <section className="card stat-module" aria-label="Industry count">
               <span className="tile"><i className="ti ti-building-store" aria-hidden /></span>
               <div>
@@ -99,7 +112,7 @@ export default function Home() {
               </div>
             </section>
           </Reveal>
-          <Reveal i={1}>
+          <Reveal i={2}>
             <section className="card stat-module" aria-label="Category count">
               <span className="tile"><i className="ti ti-folders" aria-hidden /></span>
               <div>
@@ -108,7 +121,7 @@ export default function Home() {
               </div>
             </section>
           </Reveal>
-          <Reveal i={2}>
+          <Reveal i={3}>
             <section className="card stat-module" aria-label="Funding lanes">
               <span className="tile"><i className="ti ti-cash" aria-hidden /></span>
               <div>
@@ -117,10 +130,14 @@ export default function Home() {
               </div>
             </section>
           </Reveal>
-          <Reveal i={3}>
+          <Reveal i={4}>
             <section className="card" aria-label="Desk tools">
               <h2 className="section-label">Desk tools</h2>
               <ul className="workflow-list">
+                <li>
+                  <span className="tile"><i className="ti ti-users" aria-hidden /></span>
+                  <span><Link href="/leads">Lead queue</Link> — who to call and what to say</span>
+                </li>
                 <li>
                   <span className="tile"><i className="ti ti-adjustments" aria-hidden /></span>
                   <span><Link href="/call?p=2">Qualify &amp; size</Link> — gates + burden math</span>

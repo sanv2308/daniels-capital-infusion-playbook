@@ -82,3 +82,37 @@ export interface DispositionCode {
   nextAction: string;
   cadence: string;
 }
+
+export type LeadPriority = "A" | "B";
+
+export type LeadStatus =
+  | "Not Contacted"
+  | "Attempted"
+  | "Connected"
+  | "Follow-Up"
+  | "Application"
+  | "Won"
+  | "Not a Fit"
+  | "Do Not Contact";
+
+export interface ProspectLead {
+  id: string;
+  businessName: string;
+  industry: string;
+  industrySlug: string;
+  city: string;
+  state: string;
+  priority: LeadPriority;
+  outreachScore: number;
+  messageVariant: "A" | "B";
+  website?: string;
+  publicBusinessEmail?: string;
+  publicBusinessPhone?: string;
+  signalDate: string;
+  monthsInBusiness: number;
+  decisionMaker: string;
+  fundingUse: string;
+  signalSummary: string;
+  evidenceNote: string;
+  sourceUrls: [string, string];
+}

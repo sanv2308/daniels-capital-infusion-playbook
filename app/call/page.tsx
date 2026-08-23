@@ -33,9 +33,12 @@ export default function CallCockpit() {
   const [phase, setPhase] = useState<PhaseIdx>(0);
   const [maxPhase, setMaxPhase] = useState<PhaseIdx>(0);
 
-  // deep link: /call?p=2 opens on a phase (also lets reps share position)
+  // Deep link: /call?industry=hvac&p=2 opens the right dossier and phase.
   useEffect(() => {
-    const p = Number(new URLSearchParams(window.location.search).get("p"));
+    const params = new URLSearchParams(window.location.search);
+    const linkedIndustry = params.get("industry");
+    if (linkedIndustry && industryBySlug(linkedIndustry)) setIndustrySlug(linkedIndustry);
+    const p = Number(params.get("p"));
     if (p >= 1 && p <= 4) {
       setPhase(p as PhaseIdx);
       setMaxPhase(p as PhaseIdx);
