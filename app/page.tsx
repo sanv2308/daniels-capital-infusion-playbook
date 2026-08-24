@@ -22,9 +22,10 @@ export default function Home() {
               }}
             >
               <p className="kicker">Capital Infusion</p>
-              <h1 className="h-display">Discovery Playbook</h1>
+              <h1 className="h-display">Industry Playbook</h1>
               <p className="lede" style={{ marginTop: 16 }}>
-                Pick the business type, ask one clear question, and follow the answer.
+                A sales desk for spotting the cash problem, asking the next question,
+                and keeping the call moving.
               </p>
               <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
                 <Link href="/leads" className="btn btn--primary">
@@ -79,8 +80,8 @@ export default function Home() {
             <section className="panel" style={{ padding: 18, boxShadow: "var(--shadow-panel)" }}>
               <div className="module-kicker">
                 <div>
-                  <p>Start here</p>
-                  <h2>Discovery by industry</h2>
+                  <p>Call view</p>
+                  <h2>Industry playbook</h2>
                 </div>
                 <span className="chip" style={{ color: "var(--mint)", borderColor: "rgba(110,200,211,.25)", background: "rgba(110,200,211,.08)" }}>
                   <i className="ti ti-device-mobile-search" aria-hidden /> Interactive

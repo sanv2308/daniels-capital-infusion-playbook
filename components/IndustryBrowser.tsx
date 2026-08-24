@@ -24,6 +24,8 @@ export function IndustryBrowser() {
     return INDUSTRIES.filter(
       (i) =>
         i.name.toLowerCase().includes(lower) ||
+        i.hero.toLowerCase().includes(lower) ||
+        i.pains.some((p) => p.label.toLowerCase().includes(lower)) ||
         i.uses.some((u) => u.toLowerCase().includes(lower))
     );
   }, [q]);
@@ -33,7 +35,7 @@ export function IndustryBrowser() {
       <input
         className="ci-search"
         type="search"
-        placeholder="Search industries or common funding needs…"
+        placeholder="Search industries, pain points, uses of funds…"
         value={q}
         onChange={(e) => setQ(e.target.value)}
         aria-label="Search industries"
@@ -53,7 +55,8 @@ export function IndustryBrowser() {
               <Link key={ind.slug} href={`/industries/${ind.slug}`} className="index-row">
                 <span className="id-stamp">{ind.code}</span>
                 <span className="index-row__name">{ind.name}</span>
-                <span className="index-row__meta">questions</span>
+                {ind.verified && <span className="chip chip--pass">researched</span>}
+                <span className="index-row__meta">tier {ind.tier}</span>
                 <i className="ti ti-chevron-right" style={{ color: "var(--bone-faint)" }} aria-hidden />
               </Link>
             ))}
@@ -86,7 +89,8 @@ export function IndustryBrowser() {
                     <Link key={ind.slug} href={`/industries/${ind.slug}`} className="index-row">
                       <span className="id-stamp">{ind.code}</span>
                       <span className="index-row__name">{ind.name}</span>
-                      <span className="index-row__meta">questions</span>
+                      {ind.verified && <span className="chip chip--pass">researched</span>}
+                      <span className="index-row__meta">tier {ind.tier}</span>
                       <i className="ti ti-chevron-right" style={{ color: "var(--bone-faint)" }} aria-hidden />
                     </Link>
                   ))}
