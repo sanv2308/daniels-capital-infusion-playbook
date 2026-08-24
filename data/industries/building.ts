@@ -16,8 +16,6 @@ export const BUILDING: Industry[] = [
       { label: "Material price swings on fixed bids", ask: "How are you protecting bids from lumber and steel moves?" },
       { label: "Change orders stuck unapproved", ask: "Any change orders sitting unsigned while you carry the work?" },
       { label: "Premium labor to keep crews", ask: "What's it costing you to keep crews from walking to the next job?" },
-      { label: "Retainage holding completed-job cash", ask: "How much is tied up in retainage across open jobs, and when is it scheduled to release?" },
-      { label: "Overlapping mobilization costs", ask: "Which job starting in the next 60 days creates the biggest material-and-payroll gap before the first draw?" },
     ],
     quals: [
       { q: "Residential, commercial, or mix?", read: "Commercial = bigger draws + slower pay = bigger, longer structures. Residential = faster cycles, smaller tickets." },
@@ -60,8 +58,6 @@ export const BUILDING: Industry[] = [
       { label: "Shingle/asphalt price moves between bid and buy", ask: "How much have materials moved on you this year?" },
       { label: "Winter trough burning summer profits", ask: "What does your January cash position usually look like?" },
       { label: "Scaling crews fast when a storm hits", ask: "When a storm lands, can you field enough crews to take the work?" },
-      { label: "Supplements and depreciation delaying collection", ask: "How much approved work is waiting on supplements or recoverable depreciation before you collect in full?" },
-      { label: "Upfront supplier and crew requirements", ask: "On a typical claim job, what do suppliers and crews require before the carrier releases the next check?" },
     ],
     quals: [
       { q: "Retail vs insurance-claim mix?", read: "Heavy insurance = long AR but strong ticket sizes — the classic advance file. Retail = faster cash, smaller need." },
@@ -104,8 +100,6 @@ export const BUILDING: Industry[] = [
       { label: "Unit and refrigerant costs climbing", ask: "What's a condenser costing you now versus two years ago?" },
       { label: "Tech shortage — poaching wars", ask: "Are you fully staffed, or turning away calls?" },
       { label: "Install revenue lumpy vs service steady", ask: "What's your service-to-install split?" },
-      { label: "Distributor limits during peak demand", ask: "Are distributor credit limits forcing you to pass on installs or pay COD during peak weeks?" },
-      { label: "Maintenance-plan base versus fixed payroll", ask: "Do membership and service-agreement deposits cover the shop before peak-season calls arrive?" },
     ],
     quals: [
       { q: "Residential or commercial mix?", read: "Commercial contracts = predictable AR, better file. Resi = card-paid, fast cash, MCA-friendly deposits." },
@@ -148,8 +142,6 @@ export const BUILDING: Industry[] = [
       { label: "Copper, PEX, and fixture costs", ask: "Have material prices squeezed your flat-rate book?" },
       { label: "Truck inventory tying up cash", ask: "How much stock is riding around in each truck?" },
       { label: "Collections on residential invoices", ask: "How much aged AR are you chasing right now?" },
-      { label: "Truck and licensed-tech capacity", ask: "How many booked calls are you pushing out because trucks or licensed techs are already at capacity?" },
-      { label: "Retainage on rough-in work", ask: "On construction jobs, what percentage stays held until trim-out or final inspection?" },
     ],
     quals: [
       { q: "Service/repair vs new-construction split?", read: "Service = card-paid daily deposits (MCA-friendly). New-construction = draw-schedule AR (bridge/LOC story)." },
@@ -192,8 +184,6 @@ export const BUILDING: Industry[] = [
       { label: "Permit and inspection delays parking revenue", ask: "Any jobs finished but waiting on inspection to invoice?" },
       { label: "Large-project capital lockup", ask: "What's your biggest job in progress, and how much of it are you fronting?" },
       { label: "Licensed-electrician shortage", ask: "Could you take more work if you had more licensed guys?" },
-      { label: "Long-lead gear deposits", ask: "Are panels, switchgear, or transformers requiring deposits months before you can bill the customer?" },
-      { label: "Commercial retainage outstanding", ask: "How much retainage is sitting on completed commercial work right now?" },
     ],
     quals: [
       { q: "Residential / commercial / industrial mix?", read: "Industrial and commercial = big, slow, AR-heavy (bridge lanes). Residential service = fast deposits (MCA lane)." },
@@ -236,8 +226,6 @@ export const BUILDING: Industry[] = [
       { label: "Equipment replacement cycle", ask: "What's in the fleet that's due to die this season?" },
       { label: "Crew labor — H-2B timing and retention", ask: "Are you fully crewed for the season start?" },
       { label: "Contract vs one-time revenue mix", ask: "How much of your book is locked contracts versus call-ins?" },
-      { label: "Route density limiting crew margin", ask: "Are new contracts filling existing routes, or adding windshield time between jobs?" },
-      { label: "Season-start mobilization", ask: "What has to be bought or hired before your seasonal contracts start billing?" },
     ],
     quals: [
       { q: "Commercial contracts or residential?", read: "Commercial/municipal contracts = provable recurring revenue, strongest file. Residential = deposit-based, still fundable." },
@@ -280,8 +268,6 @@ export const BUILDING: Industry[] = [
       { label: "Contractor AR at 60–120 days", ask: "What's your average days-to-pay from your contractor accounts?" },
       { label: "Manufacturer price increases", ask: "How are the mid-year price letters hitting your margins?" },
       { label: "Top-account concentration", ask: "How much of your AR is your five biggest accounts?" },
-      { label: "Fast-turn versus slow-moving stock", ask: "What portion of inventory turns every month versus sitting more than 90 days?" },
-      { label: "Stocking capacity versus customer credit", ask: "Is growth limited more by what you can keep in stock or by how long contractors take to pay?" },
     ],
     quals: [
       { q: "Rental, sales, or both?", read: "Rental fleet = asset-heavy, equipment-refi potential. Pure supply = inventory + AR story — factoring/LOC lanes." },

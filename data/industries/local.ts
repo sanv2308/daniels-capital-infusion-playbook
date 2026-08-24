@@ -16,8 +16,6 @@ export const LOCAL: Industry[] = [
       { label: "Equipment cost — lasers run $50–150k", ask: "What device would change your menu if it were on the floor?" },
       { label: "Gift-card liability — cash collected, service owed", ask: "How big does your gift-card liability get after the holidays?" },
       { label: "Membership churn", ask: "How's monthly membership retention holding up?" },
-      { label: "Revenue mix quality", ask: "What percentage of treatment revenue comes from memberships, prepaid packages, or patient financing?" },
-      { label: "Device utilization before expansion", ask: "How many appointments a week would a new device need to break even, and do you have demand to fill them?" },
     ],
     quals: [
       { q: "Day spa, medspa, or hybrid?", read: "Medspa = higher tickets, medical-director structure, equipment-heavy — bigger deals, equipment lane. Day spa = labor-driven, smaller structures." },
@@ -60,8 +58,6 @@ export const LOCAL: Industry[] = [
       { label: "Chair utilization gaps", ask: "How many chairs sit empty on a normal Tuesday?" },
       { label: "Retail attach underperformance", ask: "Is retail carrying its weight next to services?" },
       { label: "Local competition and marketing", ask: "Where do your new clients actually come from?" },
-      { label: "Commission versus booth-rental economics", ask: "Are your chairs commission, booth rental, or a mix — and which side produces predictable cash?" },
-      { label: "Rebooking rate and empty hours", ask: "What percentage of clients leave rebooked, and where are the empty hours in the week?" },
     ],
     quals: [
       { q: "Booth rent or commission?", read: "Booth rent = landlord economics: revenue is rent checks, stable but capped — funding = buildout/expansion. Commission = service revenue flows through the shop = deposit-based lanes fit." },
@@ -104,8 +100,6 @@ export const LOCAL: Industry[] = [
       { label: "Equipment aging on the floor", ask: "What on your floor is out of service or embarrassing right now?" },
       { label: "Lease escalation on big footprints", ask: "When's the lease renewal, and what's the bump looking like?" },
       { label: "Trainer economics", ask: "Is personal training profit or just cover for trainer comp?" },
-      { label: "Member acquisition payback", ask: "What are you paying to acquire a member, and how many months of dues recover it?" },
-      { label: "Failed drafts, freezes, and hidden churn", ask: "How much monthly revenue is lost to failed drafts, freezes, and cancellations?" },
     ],
     quals: [
       { q: "Model — big box, boutique, CrossFit, specialty?", read: "Boutique/class-based = higher per-member revenue, sharper churn. Big-box-lite = volume game. Specialty (climbing, MMA) = community moats, steadier retention." },
@@ -148,8 +142,6 @@ export const LOCAL: Industry[] = [
       { label: "Certified-tech shortage", ask: "Could you book more work if you had another certified tech?" },
       { label: "Parts costs and availability", ask: "How are parts prices and lead times hitting your cycle time?" },
       { label: "Insurance-payer slow pay (body work)", ask: "How much are the carriers sitting on right now?" },
-      { label: "Work-in-process trapped in approvals", ask: "How much WIP is waiting on supplements, parts, or insurer approval today?" },
-      { label: "Bay utilization versus bottlenecks", ask: "Are bays sitting empty from a tech shortage, or full with cars waiting on parts?" },
     ],
     quals: [
       { q: "General repair, specialty, or body/collision?", read: "Body shop = insurance AR (factoring/bridge story) + DRP relationships. General repair = card-paid daily deposits (MCA-friendly). Specialty (Euro, EV) = premium tickets, equipment lane." },
