@@ -3,9 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { INDUSTRIES, industryBySlug } from "@/data/industries";
-import { LANES, laneById } from "@/data/lanes";
+import { laneById } from "@/data/lanes";
 import { OBJECTIONS } from "@/data/objections";
 import { PULSE, D_CODES } from "@/data/method";
+import { discoveryGuideBySlug, UNIVERSAL_FOLLOW_UPS } from "@/data/discovery";
 import {
   runGates,
   routeLanes,
@@ -64,6 +65,7 @@ export default function CallCockpit() {
   const [dCode, setDCode] = useState<string | null>(null);
 
   const ind = industryBySlug(industrySlug) ?? INDUSTRIES[0];
+  const discovery = discoveryGuideBySlug(ind.slug);
 
   const gateInput = { monthlyRevenue: revenue, tibMonths: tib, credit, positions, tier: ind.tier };
   const gateVerdict = useMemo(() => runGates(gateInput), [revenue, tib, credit, positions, ind.tier]);
@@ -75,8 +77,6 @@ export default function CallCockpit() {
     () => computePbr({ monthlyRevenue: revenue, offer, factor, termDays }, ind.tier),
     [revenue, offer, factor, termDays, ind.tier]
   );
-
-  const topLane = route.ranked[0] ? laneById(route.ranked[0].lane) : undefined;
 
   const goTo = (p: PhaseIdx) => {
     setPhase(p);
@@ -142,14 +142,10 @@ export default function CallCockpit() {
             ))}
           </select>
         </label>
-        <span className="id-stamp">{ind.code} · tier {ind.tier}</span>
-        {ind.verified ? (
-          <span className="chip chip--pass">researched</span>
-        ) : (
-          <span className="chip">curated · verify stats before quoting</span>
-        )}
+        <span className="id-stamp">{ind.code}</span>
+        <span className="chip">discovery mode</span>
         <Link href={`/industries/${ind.slug}`} style={{ fontSize: "0.82rem", color: "var(--mint)", marginLeft: "auto" }}>
-          full dossier →
+          discovery questions →
         </Link>
       </div>
 
@@ -163,25 +159,21 @@ export default function CallCockpit() {
           {phase === 0 && (
             <section className="stack">
               <div>
-                <p className="kicker">P · pin — open + frame</p>
-                <h1 className="h-section">Prove you know their world, then ask and stop talking.</h1>
+                <p className="kicker">P · pin — open simply</p>
+                <h1 className="h-section">Ask one useful question. Do not perform expertise.</h1>
+              </div>
+              <div className="card discovery-call-opener">
+                <p className="section-label">say this</p>
+                <blockquote>&ldquo;{discovery.opener}&rdquo;</blockquote>
+                <p>Then stop. Let them answer in their own words.</p>
               </div>
               <div className="card">
-                <p className="section-label">lead with the hero stat</p>
-                <p className="hero-stat">{ind.hero}</p>
-              </div>
-              <div className="card">
-                <p className="section-label">then the rapport line — as a question</p>
-                <blockquote className="rapport-quote">&ldquo;{ind.rapport}&rdquo;</blockquote>
-              </div>
-              <div className="card">
-                <p className="section-label">frame the call</p>
+                <p className="section-label">if you reached the wrong person</p>
                 <p style={{ margin: 0, fontSize: "0.98rem", lineHeight: 1.6 }}>
-                  &ldquo;Ten minutes, a few questions, and I&apos;ll tell you exactly what you&apos;d
-                  qualify for — maybe it&apos;s nothing, and I&apos;ll tell you that too.&rdquo;
+                  &ldquo;Who handles decisions about equipment, working capital, or business financing?&rdquo;
                 </p>
               </div>
-              {exitBar(PULSE[0].exitWhen)}
+              {exitBar("The decision-maker answers the question or gives you a clear callback time.")}
             </section>
           )}
 
@@ -189,22 +181,27 @@ export default function CallCockpit() {
           {phase === 1 && (
             <section className="stack">
               <div>
-                <p className="kicker">U · uncover — pain discovery</p>
-                <h1 className="h-section">Run two or three hooks. Follow the money on whichever lands.</h1>
+                <p className="kicker">U · uncover — discovery</p>
+                <h1 className="h-section">Ask one at a time. Follow the answer that has money and timing behind it.</h1>
               </div>
-              <div className="hairline-grid">
-                {ind.pains.map((p) => (
-                  <div key={p.label} className="pain-item">
-                    <p className="pain-item__label">{p.label}</p>
-                    <p className="pain-item__ask">{p.ask}</p>
+              <div className="discovery-call-list">
+                {discovery.questions.map((item, index) => (
+                  <div key={item.question} className="card discovery-call-question">
+                    <span>{index + 1}</span>
+                    <div>
+                      <p>{item.question}</p>
+                      <small><b>Listen for:</b> {item.listenFor}</small>
+                    </div>
                   </div>
                 ))}
               </div>
-              <div className="rule-trace">
-                when a pain lands → <b>&ldquo;what does that cost you in a month?&rdquo;</b> → echo
-                their words back · no products yet — pitching here kills calls
+              <div className="panel">
+                <p className="section-label">simple follow-ups</p>
+                <div className="discovery-call-followups">
+                  {UNIVERSAL_FOLLOW_UPS.map((question) => <span key={question}>&ldquo;{question}&rdquo;</span>)}
+                </div>
               </div>
-              {exitBar(PULSE[1].exitWhen)}
+              {exitBar("You understand what they need, how much, why now, and when the money should return to the business.")}
             </section>
           )}
 
@@ -289,15 +286,17 @@ export default function CallCockpit() {
 
               <details className="panel" style={{ padding: "0.9rem 1.2rem" }}>
                 <summary className="section-label" style={{ cursor: "pointer", marginBottom: 0 }}>
-                  the reads — what each answer means ({ind.name})
+                  simple industry read — {ind.name}
                 </summary>
-                <div style={{ marginTop: "0.75rem" }}>
-                  {ind.quals.map((q) => (
-                    <div key={q.q} className="qual-item" style={{ paddingLeft: 0, paddingRight: 0 }}>
-                      <p className="qual-item__q">{q.q}</p>
-                      <p className="qual-item__read">{q.read}</p>
-                    </div>
-                  ))}
+                <div className="discovery-read-grid">
+                  <div>
+                    <p className="section-label" style={{ color: "var(--pass)" }}>Good reasons to continue</p>
+                    <ul>{discovery.goodSignals.map((item) => <li key={item}>{item}</li>)}</ul>
+                  </div>
+                  <div>
+                    <p className="section-label" style={{ color: "var(--flag)" }}>Slow down and ask more</p>
+                    <ul>{discovery.slowDownSignals.map((item) => <li key={item}>{item}</li>)}</ul>
+                  </div>
                 </div>
               </details>
 
