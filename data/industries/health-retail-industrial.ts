@@ -16,6 +16,8 @@ export const HEALTH: Industry[] = [
       { label: "Equipment costs — a CBCT or chair package runs six figures", ask: "What's on the equipment wishlist for the practice?" },
       { label: "Hygienist and clinical staff costs", ask: "How's clinical staffing — fully covered or capping the schedule?" },
       { label: "Credentialing and compliance overhead", ask: "Any new associate credentialing or carrier contracting in motion?" },
+      { label: "Payer and procedure collection gaps", ask: "Which payer or procedure leaves the most money sitting between service and collection?" },
+      { label: "Schedule capacity bottlenecks", ask: "How many weeks out is the schedule, and is the bottleneck chairs, equipment, or clinical staff?" },
     ],
     quals: [
       { q: "Specialty and provider count?", read: "Specialists (ortho, OMS, derm) = higher tickets and equipment intensity. Each associate ≈ $500k–1M annual production — the capacity math for expansion deals." },
@@ -61,6 +63,8 @@ export const RETAIL: Industry[] = [
       { label: "Foot-traffic softness", ask: "What's traffic doing year over year?" },
       { label: "Rent escalation at renewal", ask: "When's the lease up, and what's the landlord signaling?" },
       { label: "Processor fees and card economics", ask: "What's your all-in processing rate?" },
+      { label: "Inventory turns by category", ask: "Which categories turn cash fastest, and which ones are tying up your open-to-buy dollars?" },
+      { label: "Aged stock and markdown exposure", ask: "How much inventory is over 90 days old, and what margin do you give up to clear it?" },
     ],
     quals: [
       { q: "Category and margin profile?", read: "Apparel/gift = 50%+ margins, seasonal risk. Convenience categories = thin margin, steady. Margin × turn = whether funded inventory prints money or parks it." },
@@ -103,6 +107,8 @@ export const RETAIL: Industry[] = [
       { label: "Ad costs climbing (Meta, Google, Amazon PPC)", ask: "What's your CAC done over the last year?" },
       { label: "Inventory capital locked in 3PLs and containers", ask: "How much inventory value is in transit or in warehouses today?" },
       { label: "Supplier deposits for Q4 due in summer", ask: "When do your Q4 POs need deposits, and how big?" },
+      { label: "Contribution margin after every variable cost", ask: "After ads, fulfillment, returns, and platform fees, what is left on a typical order?" },
+      { label: "Supplier-to-payout cash cycle", ask: "How many days pass from paying a supplier to receiving the marketplace payout?" },
     ],
     quals: [
       { q: "Channel mix — Amazon, Shopify, wholesale?", read: "Amazon-heavy = payout-hold pain + account-risk concentration (one suspension = zero revenue: underwriters know). DTC Shopify = own the customer, cleaner story. Mixed = strongest file." },
@@ -145,6 +151,8 @@ export const RETAIL: Industry[] = [
       { label: "Tank/pump compliance and EMV upgrades", ask: "Any UST, dispenser, or compliance deadlines on the horizon?" },
       { label: "Cigarette and lottery inventory carry", ask: "How much cash sits in cigarettes and lotto at any moment?" },
       { label: "Shrink and staffing", ask: "How's shrink trending — and overnight staffing?" },
+      { label: "Inside-store profit versus fuel volume", ask: "Is the store generating the profit, or are you relying on fuel volume to carry the site?" },
+      { label: "Fuel drafts versus card settlements", ask: "Do fuel loads draft before card settlements clear, and how big is that daily timing gap?" },
     ],
     quals: [
       { q: "Gallons/month and inside-sales split?", read: "Inside share >40% = a retailer with a gas sign (good file). Fuel-dominant = volume business on pennies — size on inside margin, not gross receipts (fuel gross inflates revenue optics)." },
@@ -190,6 +198,8 @@ export const INDUSTRIAL: Industry[] = [
       { label: "Raw material buys on big orders", ask: "When a big PO lands, how do you fund the material?" },
       { label: "Line-down risk on aging equipment", ask: "What machine keeps you up at night, and what does a down day cost?" },
       { label: "Skilled-labor scarcity", ask: "Could you run a second shift if you could staff it?" },
+      { label: "Signed backlog waiting on material", ask: "How much signed backlog is waiting on material before it can enter production?" },
+      { label: "Cash trapped in raw material and WIP", ask: "How many days of cash sit in raw material and work-in-process before you can invoice?" },
     ],
     quals: [
       { q: "What do you make, for whom?", read: "Defense/medical/aerospace customers = slow but bulletproof AR (factoring gold). Consumer/construction = cyclical. Contract manufacturer = PO-driven funding story; proprietary product = inventory + growth story." },
@@ -232,6 +242,8 @@ export const INDUSTRIAL: Industry[] = [
       { label: "Harvest-to-payment gap", ask: "Once you deliver, how long until the check actually lands?" },
       { label: "Weather/yield risk on borrowed inputs", ask: "How did the last two seasons treat you on yield?" },
       { label: "Equipment costs — combines run half a million", ask: "What's the oldest machine you're depending on this season?" },
+      { label: "Contracted versus exposed crop revenue", ask: "How much of the crop is contracted or hedged versus exposed at harvest prices?" },
+      { label: "Operating-line coverage through harvest", ask: "Does the operating line cover the full input season, or are supplier terms filling the last gap?" },
     ],
     quals: [
       { q: "Crop, livestock, or mixed — and acres/head?", read: "Row crops = pure annual cycle. Livestock/dairy = monthly revenue (better PBR fit). Specialty crops = high value per acre, processor contracts. Acres × county averages = sanity-check claimed revenue." },

@@ -18,6 +18,8 @@ export const TRANSPORT: Industry[] = [
       { label: "Surprise repairs — $4k–15k transmissions", ask: "When something breaks, where does that money come from today?" },
       { label: "Insurance premium creep at renewal", ask: "What's your monthly premium now versus last year?" },
       { label: "Driver payroll on long payment gaps", ask: "Ever had to float payroll personally while waiting on a broker?" },
+      { label: "Deadhead miles draining each settlement", ask: "What percentage of your miles are empty, and which lane is causing most of it?" },
+      { label: "Factoring reserves and chargebacks", ask: "If you factor invoices now, what are the reserve, recourse, and chargeback terms actually costing you?" },
     ],
     quals: [
       { q: "How many power units — owned or leased?", read: "Owned trucks = refinanceable equity + repair exposure. Leased = fixed cost base, cleaner PBR math but no collateral. 1–3 trucks = survival deals; 5+ = growth deals." },
@@ -61,6 +63,8 @@ export const TRANSPORT: Industry[] = [
       { label: "Margin per load compressed", ask: "Where are your loaded margins versus two years ago?" },
       { label: "Growth eats cash — new accounts widen the float", ask: "Ever had to slow down sales because the float couldn't cover more volume?" },
       { label: "Bond and insurance renewals", ask: "When does your $75k BMC-84 bond renew?" },
+      { label: "Shipper accounts creating the widest float", ask: "Which shipper accounts create the biggest gap between carrier quick-pay and your collection date?" },
+      { label: "Invoice exceptions slowing collections", ask: "How much AR is over 45 days because of POD, rate-confirmation, or accessorial disputes?" },
     ],
     quals: [
       { q: "Monthly load volume and average margin per load?", read: "Volume × margin = real revenue (gross receipts mislead here — underwrite on margin, not throughput). 15%+ margins = healthy book; sub-10% = churning cheap freight." },

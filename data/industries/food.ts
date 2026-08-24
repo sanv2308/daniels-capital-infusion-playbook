@@ -16,6 +16,8 @@ export const FOOD: Industry[] = [
       { label: "Labor cost and turnover", ask: "What's turnover costing you in training and overtime?" },
       { label: "Processor holds and settlement lag", ask: "How fast does your processor actually pay out?" },
       { label: "Equipment failure — walk-ins, ovens, hoods", ask: "When the walk-in dies on a Friday, what's the plan?" },
+      { label: "Prime cost squeezing store-level margin", ask: "Where is prime cost now — food plus labor — versus six months ago?" },
+      { label: "Kitchen throughput limiting covers", ask: "Which constraint is costing more covers right now: equipment, prep capacity, or staffing?" },
     ],
     quals: [
       { q: "Concept — dine-in, QSR, delivery-heavy?", read: "QSR/delivery = high card volume = strong MCA file. Fine dining = lumpy, reservation-driven — size smaller. Heavy third-party delivery = 15–30% of revenue never hits their account as card deposits; read statements carefully." },
@@ -58,6 +60,8 @@ export const FOOD: Industry[] = [
       { label: "Peak-vs-dead week revenue swings", ask: "What's a great week versus a dead one, in numbers?" },
       { label: "Security and liability insurance costs", ask: "What's your insurance running monthly now?" },
       { label: "Pre-event stocking and staffing", ask: "How do you fund the big-weekend build-up — stock, staff, promo?" },
+      { label: "Beverage cost, overpour, and shrink", ask: "What is beverage cost as a percentage of sales, and is overpour or shrink moving it?" },
+      { label: "Event deposits versus upfront spend", ask: "For booked events, how much do you collect upfront versus spend before the night happens?" },
     ],
     quals: [
       { q: "Concept and capacity?", read: "Nightclub = door + bottle revenue, very lumpy, Tier D pricing. Neighborhood bar = steadier taps, closer to restaurant math. Capacity sets the revenue ceiling." },
@@ -99,6 +103,8 @@ export const FOOD: Industry[] = [
       { label: "Occupancy and ADR swings by season", ask: "How far apart are your best and worst months on occupancy?" },
       { label: "Renovation/FF&E cycle pressure", ask: "When were the rooms last renovated — and is it starting to show in reviews?" },
       { label: "Staffing costs in a labor-short market", ask: "Housekeeping fully staffed, or capping sellable rooms?" },
+      { label: "RevPAR pressure behind the topline", ask: "What is RevPAR doing year over year — is the change coming from room rate or occupancy?" },
+      { label: "Out-of-order rooms from deferred maintenance", ask: "How many rooms are offline or discounted today because repairs have been deferred?" },
     ],
     quals: [
       { q: "Room count, ADR, occupancy?", read: "Rooms × ADR × occupancy = revenue reality check against statements. Under 60% annual occupancy = distress signal; ask why before sizing." },
